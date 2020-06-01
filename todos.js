@@ -3,11 +3,7 @@ var inputElement = document.querySelector('#app input');
 var buttonElement = document.querySelector('#app button');
 
 
-var todos = [
-    'Fazer Cafe',
-    'njkbhbk',
-    'bjkljlkjh'
-];
+var todos = JSON.parse(localStorage.getItem('list_todos')) || [];
 
 function renderTodos(){
     listElement.innerHTML = '';
@@ -24,7 +20,7 @@ function renderTodos(){
         linkElement.setAttribute('onclick', 'deleteTodo(' + pos +')');
 
 
-        var linkText = document.createTextNode('Excluir');
+        var linkText = document.createTextNode(' Excluir');
 
         linkElement.appendChild(linkText);
 
@@ -43,6 +39,7 @@ function addTodo(){
     todos.push(todoText);
     inputElement.value = '';
     renderTodos();
+    saveToStorage();
 }
 
 buttonElement.onclick = addTodo;
@@ -50,4 +47,10 @@ buttonElement.onclick = addTodo;
 function deleteTodo(pos){
     todos.splice(pos, 1);
     renderTodos();
+    saveToStorage();
+}
+
+function saveToStorage(){
+    JSON
+    localStorage.setItem('list_todos', JSON.stringify(todos));
 }
